@@ -17,7 +17,7 @@ function formatDate(timestamp) {
     "Friday",
     "Saturday",
   ];
-  let day = date.getDay();
+  let day = days[date.getDay()];
   return `${day} ${hours}:${minutes}`;
 }
 
@@ -28,6 +28,7 @@ function displayWeather(response) {
   let humidityElement = document.querySelector("#humidity");
   let windElement = document.querySelector("#wind");
   let dateElement = document.querySelector("#date");
+  let iconElement = document.querySelector("#icon");
 
   temperatureElement.innerHTML = Math.round(response.data.temperature.current);
   cityElement.innerHTML = response.data.city;
@@ -35,11 +36,14 @@ function displayWeather(response) {
   humidityElement.innerHTML = response.data.temperature.humidity;
   windElement.innerHTML = Math.round(response.data.wind.speed);
   dateElement.innerHTML = formatDate(response.data.time * 1000);
-
-  console.log(response);
+  iconElement.setAttribute(
+    "src",
+    `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`
+  );
+  iconElement.setAttribute("alt", response.data.condition.description);
 }
 
 let apiKey = "f7df06o21b173b40085t447a104b765a";
-let apiUrl = `https://api.shecodes.io/weather/v1/current?query=Edmonton&key=${apiKey}&units=metric`;
-
+let city = "Edmonton";
+let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
 axios.get(apiUrl).then(displayWeather);
