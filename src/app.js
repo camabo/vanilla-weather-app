@@ -43,7 +43,18 @@ function displayWeather(response) {
   iconElement.setAttribute("alt", response.data.condition.description);
 }
 
-let apiKey = "f7df06o21b173b40085t447a104b765a";
-let city = "Edmonton";
-let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
-axios.get(apiUrl).then(displayWeather);
+function search(city) {
+  let apiKey = "f7df06o21b173b40085t447a104b765a";
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayWeather);
+}
+
+function handleSubmit(event) {
+  event.preventDefault();
+  let cityInputElement = document.querySelector("#city-input");
+  search(cityInputElement.value);
+}
+
+search("Edmonton");
+let form = document.querySelector("#search-form");
+form.addEventListener("submit", handleSubmit);
