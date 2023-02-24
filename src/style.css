@@ -63,3 +63,9 @@ li:first-letter {
   font-size: 16px;
   top: -34px;
 }
+
+.weather-temperature .active {
+  color: black;
+  text-decoration: none;
+  cursor: default;
+}
