@@ -24,9 +24,9 @@ function formatDate(timestamp) {
 function displayForecast() {
   let forecastElement = document.querySelector("#forecast");
 
-  let days = ["Sun", "Mon", "Tue"];
-
   let forecastHTML = `<div class="row">`;
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri"];
+
   days.forEach(function (day) {
     forecastHTML =
       forecastHTML +
@@ -35,8 +35,8 @@ function displayForecast() {
             <img src="https://shecodes-assets.s3.amazonaws.com/api/weather/icons/broken-clouds-day.png"
             alt="" width="50px"/>
             <div class="weather-forecast-temperatures">
-                <span class="weather-forecast-temperature-max">xx°</span>
-                <span class="weather-forecast-temperature-min">xx°</span>
+                <span class="weather-forecast-temperature-max">-12°</span>
+                <span class="weather-forecast-temperature-min">-20°</span>
             </div>
         </div>
       `;
@@ -54,6 +54,8 @@ function displayWeather(response) {
   let windElement = document.querySelector("#wind");
   let dateElement = document.querySelector("#date");
   let iconElement = document.querySelector("#icon");
+
+  displayForecast();
 
   celsiusTemperature = response.data.temperature.current;
 
